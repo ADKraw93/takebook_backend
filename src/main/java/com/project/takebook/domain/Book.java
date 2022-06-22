@@ -6,7 +6,7 @@ public class Book {
     private Long user_id;
     private String author;
     private String title;
-    private Long isbn;
+    private String isbnIssn;
     private int release_year;
     private String genre;
     private String language;
