@@ -1,4 +1,4 @@
-package com.project.takebook.bn.clonfig;
+package com.project.takebook.bn.config;
 
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Value;

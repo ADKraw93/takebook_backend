@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Rent {
+public class RentDto {
     private Long id;
     private Long bookId;
     private Long rentedFromId;

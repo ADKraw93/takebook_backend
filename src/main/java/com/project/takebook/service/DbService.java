@@ -1,6 +1,8 @@
 package com.project.takebook.service;
 
+import com.project.takebook.controller.BookNotFoundException;
 import com.project.takebook.controller.UserNotFoundException;
+import com.project.takebook.domain.Book;
 import com.project.takebook.domain.User;
 import com.project.takebook.repository.BookRepository;
 import com.project.takebook.repository.UserRepository;
@@ -8,13 +10,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class DbService {
     private final UserRepository userRepository;
-    //private final BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -30,5 +31,21 @@ public class DbService {
 
     public void deleteUser(final Long userId) {
         userRepository.deleteById(userId);
+    }
+
+    public List<Book> getAllBooks() {
+        return bookRepository.findAll();
+    }
+
+    public Book getBook(final Long bookId) throws BookNotFoundException {
+        return bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
+    }
+
+    public Book saveBook(final Book book) {
+        return bookRepository.save(book);
+    }
+
+    public void deleteBook(final Long bookId) {
+        bookRepository.deleteById(bookId);
     }
 }

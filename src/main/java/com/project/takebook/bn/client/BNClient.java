@@ -1,6 +1,6 @@
 package com.project.takebook.bn.client;
 
-import com.project.takebook.bn.clonfig.BNConfig;
+import com.project.takebook.bn.config.BNConfig;
 import com.project.takebook.domain.BN.BNResponse;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
