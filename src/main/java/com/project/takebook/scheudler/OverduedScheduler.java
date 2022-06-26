@@ -12,7 +12,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class DelaysScheduler {
+public class OverduedScheduler {
     private final DbService service;
 
     @Scheduled(cron = "0 0 7 * * *")

@@ -20,7 +20,7 @@ public class RentController {
     private final RentMapper rentMapper;
 
     @GetMapping
-    public ResponseEntity<List<RentDto>> getRents() {
+    public ResponseEntity<List<RentDto>> getAllRents() {
         List<Rent> rents = service.getAllRents();
         return ResponseEntity.ok(rentMapper.mapToRentDtoList(rents));
     }

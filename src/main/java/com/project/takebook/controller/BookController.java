@@ -20,7 +20,7 @@ public class BookController {
     private final BookMapper bookMapper;
 
     @GetMapping
-    public ResponseEntity<List<BookDto>> getBooks() {
+    public ResponseEntity<List<BookDto>> getAllBooks() {
         List<Book> users = service.getAllBooks();
         return ResponseEntity.ok(bookMapper.mapToBookDtoList(users));
     }
@@ -44,7 +44,7 @@ public class BookController {
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Void> createUser(@RequestBody BookDto bookDto) {
+    public ResponseEntity<Void> createBook(@RequestBody BookDto bookDto) {
         Book book = bookMapper.mapToBook(bookDto);
         service.saveBook(book);
         return ResponseEntity.ok().build();

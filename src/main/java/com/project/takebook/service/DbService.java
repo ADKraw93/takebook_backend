@@ -1,11 +1,14 @@
 package com.project.takebook.service;
 
+import com.project.takebook.controller.RestLogNotFoundException;
 import com.project.takebook.controller.RentNotFoundException;
 import com.project.takebook.controller.UserNotFoundException;
 import com.project.takebook.domain.Book;
+import com.project.takebook.domain.RestLog;
 import com.project.takebook.domain.Rent;
 import com.project.takebook.domain.User;
 import com.project.takebook.repository.BookRepository;
+import com.project.takebook.repository.RestLogRepository;
 import com.project.takebook.repository.RentRepository;
 import com.project.takebook.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +22,7 @@ public class DbService {
     private final UserRepository userRepository;
     private final BookRepository bookRepository;
     private final RentRepository rentRepository;
+    private final RestLogRepository restLogRepository;
 
     public List<User> getAllUsers() {
         return userRepository.findAll();
@@ -65,4 +69,17 @@ public class DbService {
     public List<Rent> getOverdued() {
         return rentRepository.findOverduedBook();
     }
+
+
+
+    public List<RestLog> getAllLogs() {
+        return restLogRepository.findAll();
+    }
+    public RestLog getRestLog(final Long logId) throws RestLogNotFoundException {
+        return restLogRepository.findById(logId).orElseThrow(RestLogNotFoundException::new);
+    }
+    public RestLog saveRestLog(final RestLog restLog) {
+        return restLogRepository.save(restLog);
+    }
+
 }
