@@ -26,7 +26,7 @@ public class BookController {
     }
 
     @GetMapping("{bookId}")
-    public ResponseEntity<BookDto> getBook(@PathVariable Long bookId) throws BookNotFoundException {
+    public ResponseEntity<BookDto> getBook(@PathVariable Long bookId) throws RentNotFoundException {
             return ResponseEntity.ok(bookMapper.mapToBookDto(service.getBook(bookId)));
     }
 
