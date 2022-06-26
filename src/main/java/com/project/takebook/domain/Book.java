@@ -42,4 +42,15 @@ public class Book {
 
     @Column(name = "deposit")
     private double deposit;
+
+    public Book(Long user_id, String author, String title, String isbnIssn, String publicationYear, String genre, String language) {
+        this.user_id = user_id;
+        this.author = author;
+        this.title = title;
+        this.isbnIssn = isbnIssn;
+        this.publicationYear = publicationYear;
+        this.genre = genre;
+        this.language = language;
+        this.deposit = 0;
+    }
 }
