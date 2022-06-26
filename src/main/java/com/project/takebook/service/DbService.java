@@ -62,4 +62,7 @@ public class DbService {
     public void deleteRent(final Long rentId) {
         rentRepository.deleteById(rentId);
     }
+    public List<Rent> getOverdued() {
+        return rentRepository.findOverduedBook();
+    }
 }
