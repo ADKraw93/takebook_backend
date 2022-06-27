@@ -34,7 +34,7 @@ public class BNClient {
                 .build()
                 .encode()
                 .toUri();
-        //System.out.println(url.toString());
+
         try {
             BNResponse bnResponse = restTemplate.getForObject(url, BNResponse.class);
             return Optional.ofNullable(bnResponse)

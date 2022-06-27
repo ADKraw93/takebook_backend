@@ -1,12 +1,8 @@
 package com.project.takebook.controller;
 
-import com.project.takebook.bn.client.BNClient;
 import com.project.takebook.domain.BN.BNResponse;
 import com.project.takebook.domain.BN.Bibs;
-import com.project.takebook.domain.Book;
-import com.project.takebook.domain.BookDto;
-import com.project.takebook.mapper.BibsMapper;
-import com.project.takebook.service.DbService;
+import com.project.takebook.facade.BNFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @CrossOrigin("*")
 public class BNController {
 
-    private final DbService service;
-    private final BNClient bnClient;
-    private final BibsMapper bibsMapper;
+    private final BNFacade bnFacade;
 
     @GetMapping("search")
     public ResponseEntity<BNResponse> searchBooks(@RequestParam(required = false) String isbnIssn,
@@ -30,14 +24,12 @@ public class BNController {
                                                   @RequestParam(required = false) String publicationYear,
                                                   @RequestParam(required = false) String language) {
 
-        return ResponseEntity.ok(bnClient.getBooksFromBN(isbnIssn, author, title, genre, publicationYear, language));
+        return ResponseEntity.ok(bnFacade.getBooksFromBN(isbnIssn, author, title, genre, publicationYear, language));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createBookFromBibs(@RequestBody Bibs bibs) {
-        Long user_id = 1L;  //docelowo będzie brane id zalogowanego użytkownika, ale jeszcze tego nie zaimplementowano
-        Book book = bibsMapper.mapBibsToBook(user_id, bibs);
-        service.saveBook(book);
+        bnFacade.createBookFromBibs(bibs);
         return ResponseEntity.ok().build();
     }
 }

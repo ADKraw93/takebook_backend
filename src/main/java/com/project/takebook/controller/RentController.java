@@ -1,9 +1,7 @@
 package com.project.takebook.controller;
 
-import com.project.takebook.domain.Rent;
 import com.project.takebook.domain.RentDto;
-import com.project.takebook.mapper.RentMapper;
-import com.project.takebook.service.DbService;
+import com.project.takebook.facade.RentFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -16,37 +14,32 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RentController {
 
-    private final DbService service;
-    private final RentMapper rentMapper;
+    private final RentFacade rentFacade;
 
     @GetMapping
     public ResponseEntity<List<RentDto>> getAllRents() {
-        List<Rent> rents = service.getAllRents();
-        return ResponseEntity.ok(rentMapper.mapToRentDtoList(rents));
+        return ResponseEntity.ok(rentFacade.getAllRents());
     }
 
     @GetMapping("{rentId}")
     public ResponseEntity<RentDto> getRent(@PathVariable Long rentId) throws RentNotFoundException {
-            return ResponseEntity.ok(rentMapper.mapToRentDto(service.getRent(rentId)));
+        return ResponseEntity.ok(rentFacade.getRent(rentId));
     }
 
     @DeleteMapping("{rentId}")
     public ResponseEntity<Void> deleteRent(@PathVariable Long rentId) {
-        service.deleteRent(rentId);
+        rentFacade.deleteRent(rentId);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
     public ResponseEntity<RentDto> updateRent(@RequestBody RentDto rentDto) {
-        Rent rent = rentMapper.mapToRent(rentDto);
-        Rent savedRent = service.saveRent(rent);
-        return ResponseEntity.ok(rentMapper.mapToRentDto(savedRent));
+        return ResponseEntity.ok(rentFacade.updateRent(rentDto));
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> createRent(@RequestBody RentDto rentDto) {
-        Rent rent = rentMapper.mapToRent(rentDto);
-        service.saveRent(rent);
+            rentFacade.createRent(rentDto);
         return ResponseEntity.ok().build();
     }
 }

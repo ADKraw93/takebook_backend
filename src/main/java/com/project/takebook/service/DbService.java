@@ -1,5 +1,6 @@
 package com.project.takebook.service;
 
+import com.project.takebook.controller.BookNotFoundException;
 import com.project.takebook.controller.RestLogNotFoundException;
 import com.project.takebook.controller.RentNotFoundException;
 import com.project.takebook.controller.UserNotFoundException;
@@ -42,8 +43,8 @@ public class DbService {
     public List<Book> getAllBooks() {
         return bookRepository.findAll();
     }
-    public Book getBook(final Long bookId) throws RentNotFoundException {
-        return bookRepository.findById(bookId).orElseThrow(RentNotFoundException::new);
+    public Book getBook(final Long bookId) throws BookNotFoundException {
+        return bookRepository.findById(bookId).orElseThrow(BookNotFoundException::new);
     }
     public Book saveBook(final Book book) {
         return bookRepository.save(book);
