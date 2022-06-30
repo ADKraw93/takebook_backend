@@ -51,6 +51,6 @@ public class Book {
         this.publicationYear = publicationYear;
         this.genre = genre;
         this.language = language;
-        this.deposit = 0;
+        this.deposit = 0.0;
     }
 }
